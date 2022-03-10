@@ -11,7 +11,28 @@ const initialState: BuilderState = {
   fields: [
     {
       type: FieldType.NAME,
-      details: { label: "Name", required: true, visible: true },
+      details: { label: "FullName", required: true, visible: true },
+    },
+    {
+      type: FieldType.TEXT,
+      details: { label: "About You", required: true, visible: true, rows: 5 },
+    },
+    {
+      type: FieldType.LINK,
+      details: {
+        label: "LinkedIn Url",
+        required: true,
+        visible: true,
+      },
+    },
+    {
+      type: FieldType.DATE,
+      details: {
+        label: "Last Login Date",
+        required: true,
+        visible: true,
+        pattern: "d-m-y",
+      },
     },
   ],
 };

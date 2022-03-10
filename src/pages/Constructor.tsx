@@ -43,9 +43,9 @@ function Constructor() {
         <Text fontSize="3xl">Constructor Page</Text>
       </Center>
 
-      <List spacing={3} maxW={1000} mx="auto">
+      <List spacing={3} mx="auto">
         {fields.map((f, i) => (
-          <ListItem p={3} borderBottom="1px solid">
+          <ListItem key={i} p={3} borderBottom="1px solid">
             <Flex alignItems="center">
               <Text fontSize="large"> {f.details.label}</Text> <Spacer />
               <Button

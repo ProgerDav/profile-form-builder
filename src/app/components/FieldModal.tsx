@@ -15,7 +15,7 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 
 import {
   Field,
@@ -53,9 +53,15 @@ function FieldModal({
     handleSubmit,
     register,
     reset,
-    getValues,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<FieldForm>();
+
+  const { field: typeField } = useController({
+    name: "type",
+    control,
+    rules: { required: true },
+  });
 
   useEffect(() => {
     const {
@@ -64,8 +70,6 @@ function FieldModal({
     } = activeField;
     reset({ type, label, required, visible, pattern, rows });
   }, [activeField, reset]);
-
-  const selectedType = getValues().type;
 
   const onSubmit = ({
     type,
@@ -116,17 +120,11 @@ function FieldModal({
                 {errors.label && errors.label.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={!!errors.type}>
+            <FormControl isInvalid={!!errors.type} mb={10}>
               <FormLabel htmlFor="type">Type</FormLabel>
-              <Select
-                id="type"
-                placeholder="type"
-                {...register("type", {
-                  required: "This is required",
-                })}
-              >
-                {fieldTypeVariants.map((type) => (
-                  <option value={type}>{type}</option>
+              <Select {...typeField} id="type" placeholder="type">
+                {fieldTypeVariants.map((type, i) => (
+                  <option key={i} value={type}>{type}</option>
                 ))}
               </Select>
               <FormErrorMessage>
@@ -139,8 +137,8 @@ function FieldModal({
             <FormControl>
               <Checkbox {...register("visible")}>Visible</Checkbox>
             </FormControl>
-            {selectedType === FieldType.DATE && (
-              <FormControl isInvalid={!!errors.pattern}>
+            {typeField.value === FieldType.DATE && (
+              <FormControl isInvalid={!!errors.pattern} mt={10}>
                 <FormLabel htmlFor="pattern">Pattern</FormLabel>
                 <Input
                   id="pattern"
@@ -154,8 +152,8 @@ function FieldModal({
                 </FormErrorMessage>
               </FormControl>
             )}
-            {selectedType === FieldType.TEXT && (
-              <FormControl isInvalid={!!errors.rows}>
+            {typeField.value === FieldType.TEXT && (
+              <FormControl isInvalid={!!errors.rows} mt={10}>
                 <FormLabel htmlFor="rows">Rows</FormLabel>
                 <Input
                   id="rows"

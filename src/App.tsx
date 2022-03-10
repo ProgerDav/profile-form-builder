@@ -6,9 +6,11 @@ import {
   Spacer,
   Button,
   ChakraProvider,
+  Container,
 } from "@chakra-ui/react";
 
 import Constructor from "./pages/Constructor";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -20,19 +22,21 @@ function App() {
           </Box>
           <Spacer />
           <Box>
-            <Button mr="4">
-              <Link to="/constructor">Constructor</Link>
-            </Button>
-            <Button>
-              <Link to="/profile">Profile</Link>
-            </Button>
+            <Link to="/constructor">
+              <Button mr="4">Constructor</Button>
+            </Link>
+            <Link to="/profile">
+              <Button>Profile</Button>
+            </Link>
           </Box>
         </Flex>
 
-        <Routes>
-          <Route path="/constructor" element={<Constructor />} />
-          <Route path="/profile" element={<h1>Profile</h1>} />
-        </Routes>
+        <Container maxW="container.lg">
+          <Routes>
+            <Route path="/constructor" element={<Constructor />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Container>
       </BrowserRouter>
     </ChakraProvider>
   );
