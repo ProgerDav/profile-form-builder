@@ -1,5 +1,6 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
-import { EditFieldPayloadAction } from "./types";
+import { createSlice } from "@reduxjs/toolkit";
+import { EditFieldPayloadAction, FieldType } from "./types";
+
 import {
   BuilderState,
   CreateFieldPayloadAction,
@@ -7,7 +8,12 @@ import {
 } from "./types";
 
 const initialState: BuilderState = {
-  fields: [],
+  fields: [
+    {
+      type: FieldType.NAME,
+      details: { label: "Name", required: true, visible: true },
+    },
+  ],
 };
 const builderSlice = createSlice({
   name: "builder",

@@ -8,6 +8,8 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 
+import Constructor from "./pages/Constructor";
+
 function App() {
   return (
     <ChakraProvider>
@@ -28,7 +30,7 @@ function App() {
         </Flex>
 
         <Routes>
-          <Route path="/constructor" element={<h1>Constr</h1>} />
+          <Route path="/constructor" element={<Constructor />} />
           <Route path="/profile" element={<h1>Profile</h1>} />
         </Routes>
       </BrowserRouter>
